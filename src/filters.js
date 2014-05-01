@@ -3,6 +3,7 @@ angular.module('useful_things.filters', [])
     .filter('log', function() {
         return function(ob, is_hide_in_template) {
             console.log('template log - ', ob);
+            if (is_hide_in_template) { return ''; }
             return ob;
         };
     })
@@ -25,5 +26,13 @@ angular.module('useful_things.filters', [])
                 text_arr2.push("<" + break_value + ">" + text_item + "</" + break_value + ">");
             }
             return text_arr2.join('');
+        };
+    })
+    .filter("join", function() {
+        return function(ob, join_text) {
+            if (!(ob instanceof Array)) { return ob; }
+
+            join_text = join_text || "";
+            return ob.join(join_text);
         };
     });

@@ -12,9 +12,9 @@ angular.module('useful_things.directives', [])
         };
 
         return {
+            priority: 1000,
             restrict: 'AE',
             scope: true,
-            priority: 1000,
             compile: function (tElement, tAttr) {
                 return function(scope, element, attrs) {
                     scope.$watch(function() {
