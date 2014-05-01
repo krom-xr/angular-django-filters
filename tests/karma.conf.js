@@ -19,8 +19,11 @@ module.exports = function(config) {
 
             'src/angular-useful-things.js',
             'src/directives.js',
+            'src/directives.repeat-order.js',
             'src/filters.js',
+
             'tests/directivesSpec.js',
+            'tests/filtersSpec.js',
         ],
 
         //frameworks = ["jasmine"]

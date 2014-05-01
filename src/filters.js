@@ -16,8 +16,14 @@ angular.module('useful_things.filters', [])
     .filter('linebreak', function() {
         //break_value - p, div, br
         return function(text, break_value) { 
-            //return _.map(text.split("/\r?\n/"), function(text) { })
-            
-            return 'empty';
+            if (break_value === 'br') { return text.split(/\r|\n/).join("</br>"); }
+
+            var text_arr = text.split(/\r?\n/);
+            var text_arr2 = [];
+            for (var i = 0; i < text_arr.length; i++) {
+                var text_item = text_arr[i];
+                text_arr2.push("<" + break_value + ">" + text_item + "</" + break_value + ">");
+            }
+            return text_arr2.join('');
         };
     });
