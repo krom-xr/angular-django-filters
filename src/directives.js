@@ -1,4 +1,5 @@
-angular.module('useful.things.directives', [])
+/*global angular, _*/
+angular.module('useful_things.directives', [])
     .directive('ngWith', function ngWith() {
         var createScopes = function(scope, scope_vars_ob) {
             if (!scope_vars_ob) { return; }
@@ -7,6 +8,7 @@ angular.module('useful.things.directives', [])
         };
         return {
             scope: true,
+            priority: 1000,
             compile: function (tElement, tAttr) {
                 return function(scope, element, attrs) {
                     scope.$watch(function() {

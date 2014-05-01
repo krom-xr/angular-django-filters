@@ -1,4 +1,5 @@
-angular.module('useful.things.filters', [])
+/*global angular*/
+angular.module('useful_things.filters', [])
     .filter('log', function() {
         return function(ob, is_hide_in_template) {
             console.log('template log - ', ob);
@@ -18,5 +19,5 @@ angular.module('useful.things.filters', [])
             //return _.map(text.split("/\r?\n/"), function(text) { })
             
             return 'empty';
-        }
-    })
+        };
+    });

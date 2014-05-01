@@ -7,16 +7,20 @@ module.exports = function(config) {
 
         frameworks: ['jasmine'],
         preprocessors: { 
-            'src/angular-useful-things.js': ['coverage'],
+            'src/*': ['coverage'],
         },
 
         // list of files / patterns to load in the browser
         files: [
-          'http://code.jquery.com/jquery-1.11.0.min.js',
-          'src/angular-useful-things.js',
-          'src/directives.js',
-          'src/filters.js',
-          'tests/directivesSpec.js',
+            'http://code.jquery.com/jquery-1.11.0.min.js',
+            'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js',
+            'https://code.angularjs.org/1.2.16/angular-mocks.js',
+            'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js',
+
+            'src/angular-useful-things.js',
+            'src/directives.js',
+            'src/filters.js',
+            'tests/directivesSpec.js',
         ],
 
         //frameworks = ["jasmine"]
