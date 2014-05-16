@@ -109,7 +109,7 @@
                 expect(sorted_data[2].foo.baz).toBe('c');
             });
 
-            iit('dictsortreversed', function() {
+            it('dictsortreversed', function() {
                 var unsorted = [{'age': 23, 'name': 'Barbara-Ann'},
                                 {'age': 63, 'name': 'Ra Ra Rasputin'},
                                 {'age': 18, 'name': 'Jonny B Goode'}];
@@ -123,12 +123,13 @@
             });
         });
 
-
-
-
         it('divisibleby', function() {
-            expect(true).toBe(false);
+            expect(filter('divisibleby')(4, 2)).toBe(true);
+            expect(filter('divisibleby')(4, 3)).toBe(false);
+            expect(filter('divisibleby')("abc", 3)).toBe(false);
         });
+
+
 
         it('escape', function() {
             expect(true).toBe(false);
@@ -143,15 +144,22 @@
         });
 
         it('first', function() {
-            expect(true).toBe(false);
+            expect(filter('first')([0, 1, 2])).toBe(0);
+            expect(filter('first')('')).toBe('');
+            expect(filter('first')('test')).toBe('t');
         });
 
         it('force_escape', function() {
             expect(true).toBe(false);
         });
 
-        it('get_digit', function() {
-            expect(true).toBe(false);
+        iit('get_digit', function() {
+            expect(filter('get_digit')(129, 1)).toBe(9);
+            expect(filter('get_digit')(129, 2)).toBe(2);
+            expect(filter('get_digit')(129, 3)).toBe(1);
+            expect(filter('get_digit')(129, 4)).toBe(0);
+            expect(filter('get_digit')(123, 0)).toBe(123);
+            expect(filter('get_digit')('xyz', 2)).toBe('xyz');
         });
 
         it('iriencode', function() {

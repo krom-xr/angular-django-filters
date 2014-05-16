@@ -107,30 +107,58 @@
                 dict = $filter('dictsort')(dict, sortname);
                 if (dict === "") { return ""; }
                 return dict.reverse();
-            }
+            };
+        })
+
+        .filter('divisibleby', function() {
+            return function(num, div) {
+                var res = num/div;
+                return res === parseInt(res, 10);
+            };
+        })
+
+        .filter('escape', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+        .filter('escapejs', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+        .filter('filesizeformat', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('first', function() {
+            return function(ob) {
+                return ob === "" ? ob : ob[0];
+            };
+        })
+
+        .filter('force_escape', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('get_digit', function() {
+            return function(num, index) {
+                if (!index) { return num; }
+                if (parseInt(num, 10).toString() !== num.toString()) { return num; }
+
+                num = num.toString();
+                num = num[num.length - index];
+                if (num === undefined) { return 0; }
+                return parseInt(num, 10); 
+            };
         })
 
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+
         //.filter('dicsort', function() {
             //return function() {
                 //return; //TODO
@@ -138,21 +166,72 @@
         //})
 
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
-
-
-
-
-
-
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
 
 
         .filter('linebreak', function() {
