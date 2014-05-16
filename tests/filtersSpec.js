@@ -1,4 +1,4 @@
-/*global describe, beforeEach, module, it, expect, inject */
+/*global describe, beforeEach, module, it, iit, expect, inject */
 (function() {
     describe('Фильтры', function () {
         var filter;
@@ -43,7 +43,7 @@
         it('addslashes', function () {
             expect(filter('addslashes')("I'm using Django")).toBe("I\'m using Django");
             expect(filter('addslashes')('I"m using Django')).toBe('I\"m using Django');
-            expect(filter('addslashes')('\\ : backslashes, too')).toBe('\\\\ : backslashes, too')
+            expect(filter('addslashes')('\\ : backslashes, too')).toBe('\\\\ : backslashes, too');
 
         });
 
@@ -77,15 +77,54 @@
             expect(filter('default')(null)).toBe('---');
         });
 
+        describe('dictsort', function() {
+            it('dictsort', function() {
 
+                var unsorted = [{'age': 23, 'name': 'Barbara-Ann'},
+                                {'age': 63, 'name': 'Ra Ra Rasputin'},
+                                {'age': 18, 'name': 'Jonny B Goode'}];
 
-        it('dictsort', function() {
-            expect(true).toBe(false);
+                var age_sorted = filter('dictsort')(unsorted, 'age');
+
+                expect(age_sorted[0].age).toBe(18);
+                expect(age_sorted[1].age).toBe(23);
+                expect(age_sorted[2].age).toBe(63);
+
+                expect(filter('dictsort')([1, 2, 3], 'age'), '');
+                expect(filter('dictsort')('Hello!', 'age'), '');
+                expect(filter('dictsort')({'a': 1}, 'age'), '');
+                expect(filter('dictsort')(1, 'age'), '');
+            });
+
+            it('complex sorting', function() {
+                var data = [
+                    {'foo': {'bar': 1, 'baz': 'c'}},
+                    {'foo': {'bar': 2, 'baz': 'b'}},
+                    {'foo': {'bar': 3, 'baz': 'a'}},
+                ];
+                
+                var sorted_data = filter("dictsort")(data, 'foo.baz');
+                expect(sorted_data[0].foo.baz).toBe('a');
+                expect(sorted_data[1].foo.baz).toBe('b');
+                expect(sorted_data[2].foo.baz).toBe('c');
+            });
+
+            iit('dictsortreversed', function() {
+                var unsorted = [{'age': 23, 'name': 'Barbara-Ann'},
+                                {'age': 63, 'name': 'Ra Ra Rasputin'},
+                                {'age': 18, 'name': 'Jonny B Goode'}];
+
+                var age_sorted = filter('dictsortreversed')(unsorted, 'age');
+                expect(age_sorted[0].age).toBe(63);
+                expect(age_sorted[1].age).toBe(23);
+                expect(age_sorted[2].age).toBe(18);
+
+                expect(filter('dictsort')([1, 2, 3], 'age'), '');
+            });
         });
 
-        it('dictsortreversed', function() {
-            expect(true).toBe(false);
-        });
+
+
 
         it('divisibleby', function() {
             expect(true).toBe(false);

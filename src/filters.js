@@ -26,13 +26,13 @@
                 text = text.split('"').join('\"');
                 text = text.split('\\').join("\\\\");
                 return text;
-            }
+            };
         })
 
         .filter('capfirst', function() {
             return function(text) {
                 return text[0].toUpperCase() + text.substr(1);
-            }
+            };
         })
         .filter('center', function() {
             return function(text, len) {
@@ -46,11 +46,17 @@
 
                 if (half_diff * 2 < diff) { return spaces + " " + text + spaces; }
                 return spaces + text + spaces;
-            }
+            };
         })
         .filter('cut', function() {
             return function(text, cut_text) {
                 return text.split(cut_text).join("");
+            };
+        })
+
+        .filter('date', function() {
+            return function() {
+                return; //TODO
             };
         })
 
@@ -61,6 +67,7 @@
                 return value;
             };
         })
+
         .filter('default_if_none', function() {
             return function(value, default_string) {
                 if (value === "") { return ""; }
@@ -69,6 +76,84 @@
                 return value;
             };
         })
+
+        .filter('dictsort', function() {
+            var sortdict = function(a, b) {
+                if (a === b) { return 0; }
+                if (a > b) { return 1; }
+                return -1;
+            };
+            return function(dict, sortname) {
+                if (!(dict instanceof Array)) { return ""; }
+
+                var splitted = sortname.split(".");
+                if (splitted.length > 1) {
+                    return dict.sort(function(a, b) {
+                        for (var i = 0; i < splitted.length; i++) {
+                            a = a[splitted[i]];
+                            b = b[splitted[i]];
+                        }
+                        return sortdict(a, b);
+                    });
+                }
+
+                return dict.sort(function(a, b) {
+                    return sortdict(a[sortname], b[sortname]);
+                });
+            };
+        })
+        .filter('dictsortreversed', function($filter) {
+            return function(dict, sortname) {
+                dict = $filter('dictsort')(dict, sortname);
+                if (dict === "") { return ""; }
+                return dict.reverse();
+            }
+        })
+
+
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+        //.filter('dicsort', function() {
+            //return function() {
+                //return; //TODO
+            //}
+        //})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         .filter('linebreak', function() {
             //break_value - p, div, br
