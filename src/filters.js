@@ -157,39 +157,72 @@
             };
         })
 
+        .filter('iriencode', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter("join", function() {
+            return function(ob, join_text) {
+                if (!(ob instanceof Array)) { return ob; }
+
+                join_text = join_text || "";
+                return ob.join(join_text);
+            };
+        })
+
+        .filter('last', function() {
+            return function(ob) {
+                return ob === "" ? ob : ob[ob.length - 1];
+            };
+        })
+
+        .filter('length', function() {
+            return function(ob) {
+                return ob.length;
+            };
+        })
+
+        .filter('length_is', function() {
+            return function(ob, value) {
+                return ob.length === value;
+            };
+        })
+
+        .filter('linebreaks', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('linebreaksbr', function() {
+            return function() {
+                return; //TODO
+            };
+        })
 
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+        .filter('linenumbers', function() {
+            function bringToCat(num, num_cat) {
+                var diff = num_cat - num.toString().length;
+                if (diff) {
+                    var zeros = new Array(diff + 1).join('0');
+                    num = zeros + num;
+                }
+                return num;
+            }
+            return function(text) {
+                text = text.split(/\r?\n/);
+                var num_cat = text.length.toString().length;
+                for (var i = 0; i < text.length; i++) {
+                    var item = text[i];
+                    text[i] = bringToCat((i + 1), num_cat) + '. ' + item;
+                }
 
-
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
-
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
-
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
-
-
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+                return text.join('\n');
+            };
+        })
 
         //.filter('dicsort', function() {
             //return function() {
@@ -246,14 +279,6 @@
                     text_arr2.push("<" + break_value + ">" + text_item + "</" + break_value + ">");
                 }
                 return text_arr2.join('');
-            };
-        })
-        .filter("join", function() {
-            return function(ob, join_text) {
-                if (!(ob instanceof Array)) { return ob; }
-
-                join_text = join_text || "";
-                return ob.join(join_text);
             };
         });
 })();

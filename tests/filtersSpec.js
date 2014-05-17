@@ -153,7 +153,7 @@
             expect(true).toBe(false);
         });
 
-        iit('get_digit', function() {
+        it('get_digit', function() {
             expect(filter('get_digit')(129, 1)).toBe(9);
             expect(filter('get_digit')(129, 2)).toBe(2);
             expect(filter('get_digit')(129, 3)).toBe(1);
@@ -172,16 +172,20 @@
         });
 
         it('last', function() {
-            expect(true).toBe(false);
+            expect(filter('last')([0, 1, 2])).toBe(2);
+            expect(filter('last')('')).toBe( '');
+            expect(filter('last')('foobar')).toBe('r');
         });
 
         it('length', function() {
-            expect(true).toBe(false);
+            expect(filter('length')('test')).toBe(4);
+            expect(filter('length')([1, 2, 3, 4])).toBe(4);
+        });
+        it('length_is', function() {
+            expect(filter('length_is')('test', 4)).toBe(true);
+            expect(filter('length_is')([1, 2, 3, 4], 10)).toBe(false);
         });
 
-        it('length_is', function() {
-            expect(true).toBe(false);
-        });
 
         it('linebreaks', function() {
             expect(true).toBe(false);
@@ -191,8 +195,11 @@
             expect(true).toBe(false);
         });
 
-        it('linenumbers', function() {
-            expect(true).toBe(false);
+        iit('linenumbers', function() {
+            expect(filter('linenumbers')('line 1\nline 2\nline 3')).toBe('1. line 1\n2. line 2\n3. line 3');
+            var str = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'].join("\n");
+            var res = ['01. x', '02. x', '03. x', '04. x', '05. x', '06. x', '07. x', '08. x', '09. x', '10. x'].join("\n");
+            expect(filter('linenumbers')(str)).toBe(res);
         });
 
         it('ljust', function() {
