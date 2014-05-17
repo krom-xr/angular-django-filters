@@ -195,7 +195,7 @@
             expect(true).toBe(false);
         });
 
-        iit('linenumbers', function() {
+        it('linenumbers', function() {
             expect(filter('linenumbers')('line 1\nline 2\nline 3')).toBe('1. line 1\n2. line 2\n3. line 3');
             var str = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'].join("\n");
             var res = ['01. x', '02. x', '03. x', '04. x', '05. x', '06. x', '07. x', '08. x', '09. x', '10. x'].join("\n");
@@ -203,7 +203,10 @@
         });
 
         it('ljust', function() {
-            expect(true).toBe(false);
+            expect(filter('ljust')('test', 10)).toBe('test      ');
+            expect(filter('ljust')('test', 3)).toBe('test');
+            expect(filter('rjust')('test', 10)).toBe('      test');
+            expect(filter('rjust')('test', 3)).toBe('test');
         });
 
         it('lower', function() {

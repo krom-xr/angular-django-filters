@@ -224,17 +224,23 @@
             };
         })
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+        .filter('ljust', function() {
+            return function(text, len) {
+                if (text.length >= len) { return text; }
+                var diff = len - text.length;
+                var spaces = new Array(diff + 1).join(" ");
+                return text + spaces
+            }
+        })
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+        .filter('rjust', function() {
+            return function(text, len) {
+                if (text.length >= len) { return text; }
+                var diff = len - text.length;
+                var spaces = new Array(diff + 1).join(" ");
+                return spaces + text;
+            }
+        })
 
         //.filter('dicsort', function() {
             //return function() {
