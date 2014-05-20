@@ -229,8 +229,8 @@
                 if (text.length >= len) { return text; }
                 var diff = len - text.length;
                 var spaces = new Array(diff + 1).join(" ");
-                return text + spaces
-            }
+                return text + spaces;
+            };
         })
 
         .filter('rjust', function() {
@@ -239,20 +239,20 @@
                 var diff = len - text.length;
                 var spaces = new Array(diff + 1).join(" ");
                 return spaces + text;
-            }
+            };
         })
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+        .filter('lower', function() {
+            return function(text) {
+                return text.toLowerCase(); 
+            };
+        })
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+        .filter('make_list', function() {
+            return function(text) {
+                return text.toString().split(''); 
+            };
+        })
 
         //.filter('dicsort', function() {
             //return function() {

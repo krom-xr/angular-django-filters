@@ -210,11 +210,13 @@
         });
 
         it('lower', function() {
-            expect(true).toBe(false);
+            expect(filter('lower')('TEST')).toBe('test');
+            expect(filter('lower')('\xcb')).toBe('\xeb');
         });
 
-        it('make_list', function() {
-            expect(true).toBe(false);
+        iit('make_list', function() {
+            expect(filter('make_list')('abc')).toEqual(['a', 'b', 'c']);
+            expect(filter('make_list')(1234)).toEqual(['1', '2', '3', '4']);
         });
 
         it('phone2numeric', function() {
