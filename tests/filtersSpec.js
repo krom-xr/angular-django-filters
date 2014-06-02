@@ -205,8 +205,6 @@
         it('ljust', function() {
             expect(filter('ljust')('test', 10)).toBe('test      ');
             expect(filter('ljust')('test', 3)).toBe('test');
-            expect(filter('rjust')('test', 10)).toBe('      test');
-            expect(filter('rjust')('test', 3)).toBe('test');
         });
 
         it('lower', function() {
@@ -214,13 +212,13 @@
             expect(filter('lower')('\xcb')).toBe('\xeb');
         });
 
-        iit('make_list', function() {
+        it('make_list', function() {
             expect(filter('make_list')('abc')).toEqual(['a', 'b', 'c']);
             expect(filter('make_list')(1234)).toEqual(['1', '2', '3', '4']);
         });
 
         it('phone2numeric', function() {
-            expect(true).toBe(false);
+            expect(filter('phone2numeric')('0800 flowers')).toBe('0800 3569377');
         });
 
         it('pluralize', function() {
@@ -240,7 +238,8 @@
         });
 
         it('rjust', function() {
-            expect(true).toBe(false);
+            expect(filter('rjust')('test', 10)).toBe('      test');
+            expect(filter('rjust')('test', 3)).toBe('test');
         });
 
         it('safe', function() {
@@ -252,7 +251,43 @@
         });
 
         it('slice', function() {
-            expect(true).toBe(false);
+            expect(filter('slice')('abcdefg', '1:5:2')).toBe('bd');
+            expect(filter('slice')('abcdefg', '0:100:2')).toBe('aceg');
+
+            expect(filter('slice')('abcdefg', '0::2')).toBe('aceg');
+
+            expect(filter('slice')('abcdefg', '0')).toBe('');
+            expect(filter('slice')('abcdefg', '1')).toBe('a');
+            expect(filter('slice')('abcdefg', '2')).toBe('ab');
+
+            expect(filter('slice')('abcdefg', '-1')).toBe('abcdef');
+            expect(filter('slice')('abcdefg', '-3')).toBe('abcd');
+            expect(filter('slice')('abcdefg', '1:2')).toBe('b');
+            expect(filter('slice')('abcdefg', '1:3')).toBe('bc');
+
+            expect(filter('slice')('abcdefg', ':-3')).toBe('abcd');
+            expect(filter('slice')('abcdefg', ':-3:2')).toBe('ac');
+            expect(filter('slice')('abcdefg', '1:')).toBe('bcdefg');
+        });
+
+        it('slice array', function() {
+            expect(filter('slice')('abcdefg'.split(""), '1:5:2')).toEqual('bd'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '0:100:2')).toEqual('aceg'.split(""));
+
+            expect(filter('slice')('abcdefg'.split(""), '0::2')).toEqual('aceg'.split(""));
+
+            expect(filter('slice')('abcdefg'.split(""), '0')).toEqual(''.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '1')).toEqual('a'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '2')).toEqual('ab'.split(""));
+
+            expect(filter('slice')('abcdefg'.split(""), '-1')).toEqual('abcdef'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '-3')).toEqual('abcd'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '1:2')).toEqual('b'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '1:3')).toEqual('bc'.split(""));
+
+            expect(filter('slice')('abcdefg'.split(""), ':-3')).toEqual('abcd'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), ':-3:2')).toEqual('ac'.split(""));
+            expect(filter('slice')('abcdefg'.split(""), '1:')).toEqual('bcdefg'.split(""));
         });
 
         it('slugify', function() {
@@ -356,3 +391,4 @@
     }); 
 
 })();
+//TODO non_string_input

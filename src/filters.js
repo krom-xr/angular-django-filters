@@ -233,14 +233,6 @@
             };
         })
 
-        .filter('rjust', function() {
-            return function(text, len) {
-                if (text.length >= len) { return text; }
-                var diff = len - text.length;
-                var spaces = new Array(diff + 1).join(" ");
-                return spaces + text;
-            };
-        })
 
         .filter('lower', function() {
             return function(text) {
@@ -254,17 +246,113 @@
             };
         })
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+        .filter('phone2numeric', function() {
+            var char2number = {'a': '2', 'b': '2', 'c': '2', 'd': '3', 'e': '3', 'f': '3',
+                 'g': '4', 'h': '4', 'i': '4', 'j': '5', 'k': '5', 'l': '5', 'm': '6',
+                 'n': '6', 'o': '6', 'p': '7', 'q': '7', 'r': '7', 's': '7', 't': '8',
+                 'u': '8', 'v': '8', 'w': '9', 'x': '9', 'y': '9', 'z': '9'};
 
-        //.filter('dicsort', function() {
-            //return function() {
-                //return; //TODO
-            //}
-        //})
+            return function(text) {
+                var text_arr = text.split('');
+                for (var i = 0; i < text_arr.length; i++) {
+                    var character = text_arr[i].toLowerCase();
+                    if (char2number[character]) {
+                        text_arr[i] = char2number[character];
+                    }
+                }
+                return text_arr.join('');
+            };
+        })
+
+        .filter('pluralize', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('pprint', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('random', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('removetags', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('rjust', function() {
+            return function(text, len) {
+                if (text.length >= len) { return text; }
+                var diff = len - text.length;
+                var spaces = new Array(diff + 1).join(" ");
+                return spaces + text;
+            };
+        })
+
+        .filter('safe', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('safeseq', function() {
+            return function() {
+                return; //TODO
+            };
+        })
+
+        .filter('slice', function() {
+            var NAN_ERROR_MESSAGE = "NaN error message"; //TODO this
+            var getFromToStep = function(range, oblength) {
+                var from, to, step;
+
+                range = range.split(":");
+
+                if (range.length === 1) {
+                    from = 0;
+                    to = range[0];
+                } else {
+                    from = range[0];
+                    to = range[1];
+                    step = range[2];
+                }
+                from = parseInt(from, 10), to = parseInt(to, 10), step = parseInt(step, 10);
+
+                from = from || 0;
+
+                if (range.length !== 1) { to = to || oblength; }
+
+                if (Math.abs(to) !== to) { to = oblength + to; }
+
+                step = step || 1;
+
+                return [from, to, step];
+            };
+
+            return function(text, range) {
+
+                var from_string = false;
+                if (typeof text === "string") { from_string = true; }
+
+                var from_to_step = getFromToStep(range, text.length);
+                var from = from_to_step[0], to = from_to_step[1], step = from_to_step[2];
+
+                var result = [];
+                for (var i = from; i < to; i += step) {
+                    if (text[i] === undefined) { break; }
+                    result.push(text[i]);
+                }
+                return from_string ? result.join("") : result;
+            };
+        })
 
         //.filter('dicsort', function() {
             //return function() {
